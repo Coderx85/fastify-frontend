@@ -7,7 +7,7 @@ export default function BookCard({ book }: { book: Product }) {
   return (
     <Card className="flex h-full flex-col justify-between transform transition-transform duration-300 hover:scale-105">
       <Link href={`/books/${book.id}`} className="flex flex-col h-full">
-        <CardContent className="flex-grow">
+        <CardContent className="grow">
           <h2 className="mb-2 text-xl font-semibold">{book.name}</h2>
           <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">
             {book.description}

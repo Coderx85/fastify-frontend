@@ -27,9 +27,9 @@ export default function Cart() {
           </Button>
         </div>
         {cartItems.length === 0 ? (
-          <p className="flex-grow">Your cart is empty.</p>
+          <p className="grow">Your cart is empty.</p>
         ) : (
-          <div className="flex-grow overflow-y-auto">
+          <div className="grow overflow-y-auto">
             <ul>
               {cartItems.map((item) => (
                 <li

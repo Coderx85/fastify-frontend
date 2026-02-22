@@ -20,7 +20,7 @@ export default async function BookDetailsPage({
   return (
     <div className="flex min-h-screen flex-col items-center bg-zinc-50 font-sans dark:bg-black">
       <Header loggedIn={!!token} />
-      <main className="w-full max-w-4xl flex-grow p-8">
+      <main className="w-full max-w-4xl grow p-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
           <div>
             <div className="flex h-96 items-center justify-center rounded-lg bg-gray-200 shadow-lg dark:bg-zinc-800">
