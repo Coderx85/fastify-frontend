@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { Product } from '@/app/lib/definitions';
+import { createContext, useContext, useState, ReactNode } from "react";
+import { Product } from "@/lib/definitions";
 
 interface CartItem extends Product {
   quantity: number;
@@ -51,7 +51,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 export function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
+    throw new Error("useCart must be used within a CartProvider");
   }
   return context;
 }

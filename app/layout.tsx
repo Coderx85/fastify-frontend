@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist_Mono as GeistMono } from "next/font/google";
 import { CartProvider } from "./context/cart-context";
-import Cart from "./ui/cart";
+import Cart from "../components/ui/cart";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistMono = GeistMono({
   variable: "--font-geist-mono",
@@ -21,11 +22,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${geistMono.variable} antialiased`}>
-        <CartProvider>
-          <Cart />
-          {children}
-        </CartProvider>
+      <body
+        className={` ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <CartProvider>
+            <Cart />
+            {children}
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
