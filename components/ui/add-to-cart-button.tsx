@@ -1,6 +1,6 @@
 "use client";
 
-import { useCart } from "@/app/context/cart-context";
+import { useCart } from "@/context/cart-context";
 import { Product } from "@/lib/definitions";
 import { Button } from "./button";
 

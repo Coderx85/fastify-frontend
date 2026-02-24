@@ -17,10 +17,10 @@ export const FormField = ({ ...props }: FormFieldProps) => {
   const hasErrors = touched[props.name] && errors[props.name];
 
   return (
-    <div className="mb-4 px-2 py-4 border rounded bg-gray-50">
+    <div className="space-y-2">
       <Label
         htmlFor={props.name}
-        className="block text-sm font-medium text-gray-700"
+        className="block text-sm font-medium text-foreground"
       >
         {props.label}
       </Label>
@@ -33,11 +33,13 @@ export const FormField = ({ ...props }: FormFieldProps) => {
         value={values[props.name]}
         onChange={handleChange(props.name)}
         onBlur={() => handlerBlur(props.name)}
-        className={hasErrors ? "border-red-500" : "text-white bg-gray-700"}
+        className={
+          hasErrors ? "border-destructive" : "bg-secondary/15 text-foreground"
+        }
         aria-invalid={hasErrors ? "true" : undefined}
       />
       {hasErrors && (
-        <p className="text-red-500 text-sm mt-1">{errors[props.name]}</p>
+        <p className="mt-1 text-sm text-destructive">{errors[props.name]}</p>
       )}
     </div>
   );

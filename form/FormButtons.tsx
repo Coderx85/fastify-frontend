@@ -1,14 +1,5 @@
-import { Label } from "@/components/ui/label";
 import { useFormContext } from "./FormContext";
 import { Button } from "@/components/ui/button";
-
-type FormFieldProps = {
-  name: string;
-  label: string;
-  type: string;
-  placeholder: string;
-  required: boolean;
-};
 
 type FormButtonsProps = {
   submitLabel: string;
@@ -22,7 +13,7 @@ export const FormButtons = ({ ...props }: FormButtonsProps) => {
   const { isSubmitting, resetForm } = useFormContext();
 
   return (
-    <div className="flex justify-end px-4 py-4 bg-gray-500 sm:px-6 gap-3 rounded-b-lg">
+    <div className="mt-2 flex items-center justify-end gap-3 border-t border-border pt-4">
       {/* Reset Button */}
       {props.showReset && (
         <Button
@@ -30,7 +21,7 @@ export const FormButtons = ({ ...props }: FormButtonsProps) => {
           variant={"destructive"}
           onClick={resetForm}
           disabled={isSubmitting}
-          className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded"
+          className="font-medium"
         >
           Reset
         </Button>
@@ -41,7 +32,7 @@ export const FormButtons = ({ ...props }: FormButtonsProps) => {
         variant={"outline"}
         onClick={props.onCancel}
         disabled={isSubmitting}
-        className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded"
+        className="font-medium"
       >
         {props.cancelLabel}
       </Button>
@@ -50,7 +41,7 @@ export const FormButtons = ({ ...props }: FormButtonsProps) => {
         type="submit"
         onClick={props.onSubmit}
         disabled={isSubmitting}
-        className="bg-blue-500 hover:bg-primary text-primary-foreground font-medium py-2 px-4 rounded"
+        className="font-medium"
       >
         {props.submitLabel}
       </Button>

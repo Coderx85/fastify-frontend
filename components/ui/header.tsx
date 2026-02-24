@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { logout } from "@/app/actions";
-import { useCart } from "@/app/context/cart-context";
+import { useCart } from "@/context/cart-context";
 import { Button } from "./button";
 
 export default function Header({ loggedIn }: { loggedIn: boolean }) {

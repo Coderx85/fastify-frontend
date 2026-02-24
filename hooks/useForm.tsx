@@ -8,6 +8,14 @@ export type FormProps<D> = {
   validate: (data: D) => Partial<Record<keyof D, string>>;
 };
 
+/**
+ * Custom hook to manage form state, validation, and submission.
+ * It provides handlers for input changes, form submission, and form reset.
+ * @returns An object containing form values, errors, touched fields, submission state, and handler functions.
+ * @prop initialValues - The initial values for the form fields.
+ * @prop onSubmit - The function to call when the form is submitted with valid data.
+ * @prop validate - A function that takes form values and returns an object of validation errors.
+ */
 export type FormState = {
   values: FormProps<any>["initialValues"];
   errors: Partial<Record<keyof FormProps<any>["initialValues"], string>>;
@@ -24,20 +32,36 @@ export type FormState = {
   setFieldError: (name: any, error: string) => void;
 };
 
+/**
+ *
+ * @param initialValues - The initial values for the form fields.
+ * @param onSubmit - The function to call when the form is submitted with valid data.
+ * @param validate - A function that takes form values and returns an object of validation errors.
+ * @returns An object containing form values, errors, touched fields, submission state, and handler functions.
+ * This hook manages form state, validation, and submission logic. It provides handlers for input changes, form submission, and form reset.
+ */
 export const useForm = ({
   initialValues,
   onSubmit,
   validate,
 }: FormProps<any>) => {
+  // form state
   const [values, setValues] = useState(initialValues);
+
+  // validation state
   const [errors, setErrors] = useState<
     Partial<Record<keyof typeof initialValues, string>>
   >({});
+
+  // touched state to track which fields have been interacted with
   const [touched, setTouched] = useState<
     Partial<Record<keyof typeof initialValues, boolean>>
   >({});
+
+  // submission state to track if the form is currently being submitted
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // handler for input changes, updates the corresponding field in values
   const handleChange = useCallback(
     (name: keyof typeof initialValues) => (e: React.ChangeEvent<any>) => {
       const target = e.target;
@@ -56,6 +80,7 @@ export const useForm = ({
     [errors],
   );
 
+  // handler for input blur events, marks the field as touched and validates it
   const handlerBlur = useCallback(
     (name: any) => {
       setTouched((prev) => ({
@@ -73,6 +98,7 @@ export const useForm = ({
     [errors],
   );
 
+  // handler for form submission, validates the form and calls onSubmit if valid
   const handleSubmit = useCallback(
     async (e: any) => {
       e.preventDefault();
@@ -106,6 +132,7 @@ export const useForm = ({
     [values, validate, onSubmit],
   );
 
+  // function to reset the form to its initial state
   const resetForm = useCallback(() => {
     setValues(initialValues);
     setErrors({});
@@ -113,14 +140,17 @@ export const useForm = ({
     setIsSubmitting(false);
   }, [initialValues]);
 
+  // function to set multiple form values at once, merging with existing values
   const setFormValues = useCallback((newValues: any) => {
     setValues((prev: any) => ({ ...prev, ...newValues }));
   }, []);
 
+  // function to set a single field value, merging with existing values
   const setFieldValues = useCallback((name: any, value: any) => {
     setValues((prev: any) => ({ ...prev, [name]: value }));
   }, []);
 
+  // function to set a single field error, merging with existing errors
   const setFieldError = useCallback((name: any, error: string) => {
     setErrors((prev) => ({ ...prev, [name]: error }));
   }, []);

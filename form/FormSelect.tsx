@@ -20,10 +20,10 @@ export const FormSelect = ({ ...props }: FormSelectProps) => {
   const hasErrors = touched[props.name] && errors[props.name];
 
   return (
-    <div className="mb-4">
+    <div className="space-y-2">
       <Label
         htmlFor={props.name}
-        className="block text-sm font-medium text-gray-700"
+        className="block text-sm font-medium text-foreground"
       >
         {props.label}
       </Label>
@@ -34,13 +34,13 @@ export const FormSelect = ({ ...props }: FormSelectProps) => {
         value={values[props.name]}
         onChange={handleChange(props.name)}
         onBlur={() => handlerBlur(props.name)}
-        className="mt-1 block w-full bg-gray-700 text-white rounded-md border-gray-300 shadow-sm px-4 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+        className="block h-9 w-full rounded-md border border-input bg-secondary/15 px-3 text-sm text-foreground shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
       >
         {props.options.map((option) => (
           <option
             key={option.value}
             value={option.value}
-            className="text-gray-700 bg-accent-foreground text-sm hover:bg-gray-100"
+            className="bg-secondary/15 text-foreground text-sm"
             aria-label={option.label}
           >
             {option.label}
@@ -48,7 +48,7 @@ export const FormSelect = ({ ...props }: FormSelectProps) => {
         ))}
       </select>
       {hasErrors && (
-        <p className="text-red-500 text-sm mt-1">{errors[props.name]}</p>
+        <p className="mt-1 text-sm text-destructive">{errors[props.name]}</p>
       )}
     </div>
   );

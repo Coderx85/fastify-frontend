@@ -1,6 +1,6 @@
 "use client";
 
-import { useCart } from "@/app/context/cart-context";
+import { useCart } from "@/context/cart-context";
 import Link from "next/link";
 import { Button } from "./button";
 import { Card, CardContent } from "./card";
