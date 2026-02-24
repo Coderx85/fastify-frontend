@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/app/ui";
+import { Card, CardContent, CardHeader } from "@/components/ui";
 import React from "react";
 
 const SuccessPage = () => {

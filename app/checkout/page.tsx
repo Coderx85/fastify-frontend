@@ -2,7 +2,7 @@
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { createOrderAndProceedToPayment } from "@/app/actions";
-import { useCart } from "@/app/context/cart-context";
+import { useCart } from "@/context/cart-context";
 import Link from "next/link";
 
 export default function CheckoutPage() {

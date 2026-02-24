@@ -1,7 +1,7 @@
 "use server";
 
-import { deleteToken, getToken, setToken } from "./lib/cookie";
-import { ApiResponse, Product } from "./lib/definitions";
+import { deleteToken, getToken, setToken } from "../lib/cookie";
+import { ApiResponse, Product } from "../lib/definitions";
 import { redirect } from "next/navigation";
 
 const API_BASE_URL =
@@ -16,7 +16,7 @@ export async function getBooks(): Promise<Product[]> {
       throw new Error(`Failed to fetch books. Status: ${res.status}`);
     }
     const json: ApiResponse<{ products: Product[] }> = await res.json();
-    if (!json.ok) {
+    if (!json.ok || !json.data || !json.data.products) {
       throw new Error(json.message || "Failed to fetch books");
     }
     return json.data.products;
@@ -113,7 +113,7 @@ export async function register(
     }
     return { message: "An error occurred during registration." };
   }
-  redirect("/login");
+  redirect("/auth/login");
 }
 
 export async function logout() {
@@ -127,7 +127,7 @@ export async function createOrderAndProceedToPayment(
 ) {
   const token = await getToken();
   if (!token) {
-    return redirect("/login");
+    return redirect("/auth/login");
   }
 
   const cartItemsJSON = formData.get("cartItems") as string;
