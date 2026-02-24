@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist_Mono as GeistMono } from "next/font/google";
-import { CartProvider } from "./context/cart-context";
+import { CartProvider } from "../context/cart-context";
 import Cart from "../components/ui/cart";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Headers from "@/components/ui/header";
 
 const geistMono = GeistMono({
   variable: "--font-geist-mono",
@@ -28,6 +29,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <CartProvider>
+            <Headers loggedIn />
             <Cart />
             {children}
           </CartProvider>
