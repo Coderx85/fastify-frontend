@@ -9,9 +9,16 @@ export type Product = {
   createdAt: string;
 };
 
-export type ApiResponse<T> = {
-  ok: boolean;
-  statusCode: number;
-  message: string;
-  data: T;
-};
+export type ApiResponse<T> =
+  | {
+      ok: true;
+      statusCode: number;
+      message: string;
+      data: T;
+    }
+  | {
+      ok: false;
+      statusCode: number;
+      message: string;
+      error: string;
+    };
